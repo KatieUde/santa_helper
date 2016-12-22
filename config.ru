@@ -1,3 +1,7 @@
-require './app' #ruby requiring app.rb file
+require 'sinatra/base'
 
-run Sinatra::Application
+require('./controllers/application')
+require('./controllers/idea')
+require('./models/idea')
+
+map('/') { run IdeasController }
