@@ -17,14 +17,14 @@ var gulp = require('gulp'),
 
 // Styles
 gulp.task('styles', function() {
-  return sass('src/styles/main.scss', { style: 'expanded' })
+  return sass('./src/styles/main.scss', { style: 'expanded' })
     .pipe(autoprefixer({
       browsers: ['> 5%'],
       cascade: false
     }))
-    .pipe(gulp.dest('dist/styles'))
+    .pipe(gulp.dest('./public/styles'))
     .pipe(cssnano())
-    .pipe(gulp.dest('dist/styles'))
+    .pipe(gulp.dest('./public/styles'))
     .pipe(notify({ message: 'Styles task complete' }));
 });
 
@@ -34,10 +34,10 @@ gulp.task('scripts', function() {
     .pipe(jshint('jshintrc'))
     .pipe(jshint.reporter('default'))
     .pipe(concat('main.js'))
-    .pipe(gulp.dest('dist/scripts'))
+    .pipe(gulp.dest('public/scripts'))
     .pipe(rename({ suffix: '.min' }))
     .pipe(uglify())
-    .pipe(gulp.dest('dist/scripts'))
+    .pipe(gulp.dest('public/scripts'))
     .pipe(notify({ message: 'Scripts task complete' }));
 });
 
@@ -45,13 +45,13 @@ gulp.task('scripts', function() {
 gulp.task('images', function() {
   return gulp.src('src/images/**/*')
     .pipe(cache(imaginemin( { optimizationLevel: 5, progressive: true, interlaced: true })))
-    .pipe(gulp.dest('dist/images'))
+    .pipe(gulp.dest('public/images'))
     .pipe(notify({ message:'Images task complete' }));
 });
 
 // Clean
 gulp.task('clean', function() {
-  return del(['dist/styles', 'dist/scripts', 'dist/images']);
+  return del(['public/styles', 'public/scripts', 'public/images']);
 });
 
 // Default task
@@ -74,7 +74,7 @@ gulp.task('watch', function() {
     // Create LiveReload server
     livereload.listen();
 
-    // Watch any files in dist/, reload on change
-    gulp.watch(['dist/**']).on('change', livereload.changed);
-    
+    // Watch any files in public/, reload on change
+    gulp.watch(['public/**']).on('change', livereload.changed);
+
 });

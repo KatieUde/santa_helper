@@ -4,8 +4,4 @@ class IdeasController < ApplicationController
     haml :layout
   end
 
-  post '/' do
-
-  end
-
 end

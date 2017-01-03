@@ -9,6 +9,7 @@ class ApplicationController < Sinatra::Base
     :username => 'root'
   )
 
+  set :public_folder, File.expand_path('../../public', __FILE__)
   set :views, File.expand_path('../../src/views', __FILE__)
 
 
